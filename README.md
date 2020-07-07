@@ -1,7 +1,5 @@
 # fetch-latest-release
 
-![Latest Release](https://img.shields.io/github/v/release/thebritican/fetch-latest-release?label=Latest%20Release)
-
 A tiny GitHub action to fetch the latest GitHub release for a given repository
 
 ## Inputs
@@ -30,6 +28,7 @@ A tiny GitHub action to fetch the latest GitHub release for a given repository
 - `author_html_url`: The HTTP URL for this release's author
 - `author_type`: ''
 - `author_site_admin`: Whether or not this user is a site administrator.
+- `sha`: The sha hash of the release
 
 ## Usage
 
@@ -40,4 +39,3 @@ steps:
     with:
       github_token: ${{ github.token }}
 ```
-
