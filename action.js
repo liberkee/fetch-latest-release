@@ -38,6 +38,22 @@ async function run() {
   }
 
   const { data } = latestRelease
+  tagName = data.tag_name
+  ref = `tags/${tagName}`
+
+  try {
+    releaseCommit = await octokit.git.getRef({
+        owner,
+        repo,
+        ref
+      })
+  } catch (error) {
+    core.info(`Could not fetch the ref \`${ref}\`. Have you made one yet?`)
+    core.setFailed(error)
+  }
+
+  releaseHash = releaseCommit.data.object.sha
+  core.info(`Release hash \`${releaseHash}\``)
 
   core.setOutput('url', data.url)
   core.setOutput('assets_url', data.assets_url)
@@ -56,6 +72,8 @@ async function run() {
   core.setOutput('author_html_url', data.author.html_url)
   core.setOutput('author_type', data.author.type)
   core.setOutput('author_site_admin', data.author.site_admin)
+
+  core.setOutput('sha', releaseHash)
 }
 
 try {
