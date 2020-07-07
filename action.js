@@ -38,8 +38,7 @@ async function run() {
   }
 
   const { data } = latestRelease
-  tagName = data.tag_name
-  ref = `tags/${tagName}`
+  ref = `tags/${data.tag_name}`
 
   try {
     releaseCommit = await octokit.git.getRef({
